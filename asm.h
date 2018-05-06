@@ -103,4 +103,11 @@ struct s_file
 
 void	mb_putstr_col(char *str, char *col);
 
+/*
+** mb_checkup.c
+*/
+
+int		mb_hasname(t_file *f);
+int		mb_only_whtspace(char *str);
+
 #endif
