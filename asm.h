@@ -24,10 +24,10 @@
 # define FCOL(i, j) mb_putstr_col(i, j);
 # define RET_ERR(i, j) {FCOL("ERROR: ", RED); FCOL(i, LRED); return (j);}
 
-# define REG_SIZE 1
-# define DIR_SIZE 4
-# define IND_SIZE 2
-# define LABLE_SIZE 2
+// # define REG_SIZE 1
+// # define DIR_SIZE 4
+// # define IND_SIZE 2
+// # define LABLE_SIZE 2
 
 // # define VERBOSE_OPT 1
 // # define LEAKS_OPT 2
@@ -48,7 +48,7 @@ enum e_symboltype
 	COMMAND_COMMENT,
 	COMMENT,
 	EXECUTABLE,
-	LINE,
+	SLINE,
 	LABEL,
 	INSTRUCT,
 	ARG_REG = 9,
@@ -61,6 +61,7 @@ enum e_symboltype
 typedef struct s_symbol t_symbol;
 typedef struct s_str t_str;
 typedef struct s_file t_file;
+typedef struct s_op	t_op;
 
 struct s_symbol
 {
@@ -97,6 +98,29 @@ struct s_file
 	char	*cor_name;
 };
 
+// struct s_op
+// {
+// 	char	*name;
+// 	int		param_nbr;
+// 	int		param_type[4];
+// 	int		opcode;
+// 	int		cycle_nbr;
+// 	char	*descr;
+// 	int		is_pcode;
+// 	int		has_id;
+// };
+
+typedef struct		s_op
+{
+	char	*name;
+	int		args_nb;
+	int		arg[3];
+	int		opcode;
+	int		cycles_cost;
+	char	codage;
+	char	dir_siz;
+}					t_op;
+
 /*
 ** mb_support_func.c
 */
@@ -109,5 +133,7 @@ void	mb_putstr_col(char *str, char *col);
 
 int		mb_hasname(t_file *f);
 int		mb_only_whtspace(char *str);
+int		mb_has_valid_parameter(t_str *str);
+int		mb_check_valid_param(t_symbol *symbol, char *str);
 
 #endif
