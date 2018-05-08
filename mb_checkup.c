@@ -111,3 +111,29 @@ int		mb_check_valid_param(t_symbol *symbol, char *str)
 						'ES' successful execution of a program. 
 						in this case usage of "exit(1 or 0)" is non-portable. */
 }
+
+void	mb_check_valid_comment(t_file *f, t_str *str)
+{
+	int		empty;
+	int		name_beginning;
+	int		name_ending;
+	char	*line;
+
+	empty = 0;
+	while (ft_isspace((str->line)[empty]))
+		++empty;
+	line = str->line + empty;
+	if (ft_strncmp(line, COMMENT_CMD_STRING, ft_strlen(COMMENT_CMD_STRING)) == 0)
+	{
+		str->type = COMMAND_COMMENT;
+		name_beginning = ft_strlen(COMMENT_CMD_STRING);
+		while (line && line[name_beginning] && line[name_beginning] != '"')
+			++name_beginning;
+		++name_beginning;
+		name_ending = name_beginning;
+		while (line && line[name_ending] && line[name_ending] != '"')
+			++name_ending;
+		ft_strncpy(f->header.comment, (const char*)line + name_beginning, name_ending - name_beginning);
+	}
+	return ;
+}

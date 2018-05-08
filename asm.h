@@ -149,6 +149,7 @@ struct		s_op
 */
 
 void	mb_putstr_col(char *str, char *col);
+int		mb_haslabel(char *line);
 
 /*
 ** mb_checkup.c
@@ -158,7 +159,7 @@ int		mb_hasname(t_file *f);
 int		mb_only_whtspace(char *str);
 int		mb_has_valid_parameter(t_str *str);
 int		mb_check_valid_param(t_symbol *symbol, char *str);
-int		mb_haslabel(char *line);
+void	mb_check_valid_comment(t_file *f, t_str *str);
 
 /*
 ** mb_mainread.c
