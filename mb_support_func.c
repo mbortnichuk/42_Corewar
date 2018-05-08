@@ -33,3 +33,18 @@ void	mb_putstr_col(char *str, char *col)
 {
 	mb_putstr_col_fd(str, col, 1);
 }
+
+int		mb_haslabel(char *line)
+{
+	register int i;
+
+	i = 0;
+	while (line[i] && ft_isspace(line[i]))
+		++i;
+	while (line[i] && !ft_isspace(line[i]) && line[i] != SEPARATOR_CHAR)
+		++i;
+	--i;
+	if (line[i] == LABEL_CHAR)
+		return (i);
+	return (0);
+}

@@ -24,24 +24,23 @@
 # define FCOL(i, j) mb_putstr_col(i, j);
 # define RET_ERR(i, j) {FCOL("ERROR: ", RED); FCOL(i, LRED); return (j);}
 
-// # define REG_SIZE 1
-// # define DIR_SIZE 4
-// # define IND_SIZE 2
 // # define LABLE_SIZE 2
 
 // # define VERBOSE_OPT 1
 // # define LEAKS_OPT 2
 
+# define LAST_COMMENT_CHR ';'
+
 # define STR	((t_str*)(temp->content))
 # define SYMBOL ((t_symbol*)(temp->content))
 
-enum e_errortype
+enum error
 {
 	TOO_MANY_PAR = 0, 
 	NOT_ENOUGHT_PAR
-} error;
+};
 
-enum e_symboltype
+enum symbol
 {
 	UNKNWN = 0,
 	COMMAND_NAME,
@@ -56,7 +55,31 @@ enum e_symboltype
 	ARG_IND = 12,
 	ARG_INDLAB,
 	ARG_DLAB
-} symbol;
+};
+
+
+// enum e_errortype
+// {
+// 	TOO_MANY_PAR = 0, 
+// 	NOT_ENOUGHT_PAR
+// } error;
+
+// enum e_symboltype
+// {
+// 	UNKNWN = 0,
+// 	COMMAND_NAME,
+// 	COMMAND_COMMENT,
+// 	COMMENT,
+// 	EXECUTABLE,
+// 	SLINE,
+// 	LABEL,
+// 	INSTRUCT,
+// 	ARG_REG = 9,
+// 	ARG_DIR = 10,
+// 	ARG_IND = 12,
+// 	ARG_INDLAB,
+// 	ARG_DLAB
+// } symbol;
 
 typedef struct s_symbol t_symbol;
 typedef struct s_str t_str;
@@ -110,7 +133,7 @@ struct s_file
 // 	int		has_id;
 // };
 
-typedef struct		s_op
+struct		s_op
 {
 	char	*name;
 	int		args_nb;
@@ -119,7 +142,7 @@ typedef struct		s_op
 	int		cycles_cost;
 	char	codage;
 	char	dir_siz;
-}					t_op;
+};
 
 /*
 ** mb_support_func.c
@@ -135,5 +158,21 @@ int		mb_hasname(t_file *f);
 int		mb_only_whtspace(char *str);
 int		mb_has_valid_parameter(t_str *str);
 int		mb_check_valid_param(t_symbol *symbol, char *str);
+int		mb_haslabel(char *line);
+
+/*
+** mb_mainread.c
+*/
+
+int		mb_readfile(t_file *f);
+int		mb_addline(t_file *f, char *line, size_t *i, int haslabel);
+
+/*
+** mb_initiation.c
+*/
+
+void	mb_initfile(t_file *f);
+int		mb_initline(t_file *f, char *line, size_t i, int linetype);
+
 
 #endif

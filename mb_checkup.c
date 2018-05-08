@@ -57,17 +57,17 @@ int		mb_has_valid_parameter(t_str *str)
 	if (!(temp = str->symbols))
 		return (1);
 	instance = SYMBOL->op->opcode; // from here check in progress if structure element has changed;
-	if (OPTAB.param_nbr != (int)str->param_nbr)
+	if (OPTAB.args_nb != (int)str->param_nbr)
 		RET_ERR("Incorrect parameters number for the instance.\n", 0);
 	if (!(temp->next))
 		return (0);
 	temp = temp->next;
 	nbr = 0;
-	while (temp || (int)nbr < OPTAB.param_nbr)
+	while (temp || (int)nbr < OPTAB.args_nb)
 	{
 		new_t = (SYMBOL->type == ARG_DLAB ? 2 : SYMBOL->type - 8);
 		new_t = (new_t == ARG_INDLAB - 8 ? 4 : new_t);
-		if (new_t & ~OPTAB.param_type[nbr]) /* tilda '~' in C-like languages 
+		if (new_t & ~OPTAB.arg[nbr]) /* tilda '~' in C-like languages 
 					 performs as a bitwise NOT operation - all the 1 bits in the
 					 operand are set to 0 and all the 0 bits in the operand
 					 are set to 1. In other words, it creates the complement 

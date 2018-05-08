@@ -13,7 +13,10 @@
 NAME = asm
 
 SRCS = mb_checkup.c \
-		mb_support_func.c
+		mb_initiation.c \
+		mb_mainread.c \
+		mb_support_func.c \
+		main.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -35,9 +38,6 @@ RM = rm -fv
 		# -f ignoring ninexistent files and arguments, never prompt;
 		# -v explain what is being done.
 
-%.o: %.c
-	$(CC) $(CFLAGS) $(INCL) -c $< -o $@
-
 all: $(NAME)
 
 $(NAME): $(OBJS)
@@ -57,6 +57,9 @@ fclean:
 
 re: fclean all
 	@ echo "\033[36;1mre performed\033[0m"
+
+%.o: %.c
+	$(CC) $(CFLAGS) $(INCL) -c $< -o $@
 
 norm:
 	@ echo "\033[35;1mWait a sec.\033[0m"
