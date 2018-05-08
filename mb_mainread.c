@@ -26,8 +26,8 @@ int		mb_readfile(t_file *f)
 			free(line);
 			continue ;
 		}
-		// if (mb_addline(f, line, &i, mb_haslabel(line)))  two function to be written in the future 
-		// 	return (EXIT_FAILURE);
+		if (mb_addline(f, line, &i, mb_haslabel(line)))
+			return (EXIT_FAILURE);
 		free(line);
 		++i;
 	}
