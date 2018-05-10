@@ -16,6 +16,8 @@
 # include "libft/libft.h"
 # include "op.h"
 
+# include <stdbool.h>
+
 # define RC "\033[0m"
 # define RED "\033[22;31m"
 # define LRED "\033[1;31m"
@@ -145,6 +147,12 @@ struct		s_op
 };
 
 /*
+** mb_asm.h
+*/
+
+void	mb_check_asm_arg(/*t_file *f, */int argc, char *argv[]);
+
+/*
 ** mb_support_func.c
 */
 
@@ -152,14 +160,22 @@ void	mb_putstr_col(char *str, char *col);
 int		mb_haslabel(char *line);
 
 /*
-** mb_checkup.c
+** mb_support_func2.c
 */
 
 int		mb_hasname(t_file *f);
 int		mb_only_whtspace(char *str);
+int		mb_iscomment(t_str *str);
+void	mb_asm_err(char *s);
+
+/*
+** mb_checkup.c
+*/
+
 int		mb_has_valid_parameter(t_str *str);
 int		mb_check_valid_param(t_symbol *symbol, char *str);
 void	mb_check_valid_comment(t_file *f, t_str *str);
+void	mb_check_valid_name(t_file *f, t_str *str);
 
 /*
 ** mb_mainread.c
@@ -167,6 +183,12 @@ void	mb_check_valid_comment(t_file *f, t_str *str);
 
 int		mb_readfile(t_file *f);
 int		mb_addline(t_file *f, char *line, size_t *i, int haslabel);
+
+/*
+** mb_parsing.c
+*/
+
+int		mb_parsefile(t_file *f);
 
 /*
 ** mb_initiation.c

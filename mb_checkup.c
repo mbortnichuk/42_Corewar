@@ -22,32 +22,7 @@ extern	t_op op_tab[17]; /* 'extern' keyword is used to extend
 						статичну властивість - виділяється на початку запуску програми 
 						і вивільняється при її закінченні. */
 
-int		mb_hasname(t_file *f)
-{
-	if (!(f->hasname))
-		return (0);
-	return (1);
-}
-
-int		mb_only_whtspace(char *str) // return here to ++i; if in process some troubles will occur
-{
-	register size_t i;
-	/* 'register' suggests to store a size_t variable "i" 
-	in a CPU register or another fast location, when 'default size_t i' 
-	will store  this variable in RAM, register or other location
-	as compiler sees fit and based on how variable is used */
-
-	i = -1; // i = 0;
-	while (str[++i] != '\0') //remove ++i;
-	{
-		if (!ft_isspace(str[i]))
-			return (0);
-		// add here ++i;
-	}
-	return (1);
-}
-
-int		mb_has_valid_parameter(t_str *str)
+/*int		mb_has_valid_parameter(t_str *str)
 {
 	int		new_t; //new type
 	size_t	nbr;
@@ -67,7 +42,7 @@ int		mb_has_valid_parameter(t_str *str)
 	{
 		new_t = (SYMBOL->type == ARG_DLAB ? 2 : SYMBOL->type - 8);
 		new_t = (new_t == ARG_INDLAB - 8 ? 4 : new_t);
-		if (new_t & ~OPTAB.arg[nbr]) /* tilda '~' in C-like languages 
+		if (new_t & ~OPTAB.arg[nbr]) tilda '~' in C-like languages 
 					 performs as a bitwise NOT operation - all the 1 bits in the
 					 operand are set to 0 and all the 0 bits in the operand
 					 are set to 1. In other words, it creates the complement 
@@ -75,12 +50,12 @@ int		mb_has_valid_parameter(t_str *str)
 					 For example:
 					 10101000 11101001 // Original  (Binary for -22,295 in 16-bit two's complement)
 					 01010111 00010110 // ~Original (Binary for  22,294 in 16-bit two's complement) */
-			return (0);
-		temp = temp->next;
-		++nbr;
-	}
-	return (1);
-}
+// 			return (0);
+// 		temp = temp->next;
+// 		++nbr;
+// 	}
+// 	return (1);
+// }
 
 int		mb_check_valid_param(t_symbol *symbol, char *str)
 {
@@ -134,6 +109,33 @@ void	mb_check_valid_comment(t_file *f, t_str *str)
 		while (line && line[name_ending] && line[name_ending] != '"')
 			++name_ending;
 		ft_strncpy(f->header.comment, (const char*)line + name_beginning, name_ending - name_beginning);
+	}
+	return ;
+}
+
+void	mb_check_valid_name(t_file *f, t_str *str)
+{
+	int		empty;
+	int		name_beginning;
+	int		name_ending;
+	char	*line;
+
+	empty = 0;
+	while (ft_isspace((str->line)[empty]))
+		++empty;
+	line = str->line + empty;
+	if (ft_strncmp(line, NAME_CMD_STRING, ft_strlen(NAME_CMD_STRING)) == 0)
+	{
+		f->hasname = 1;
+		str->type = COMMAND_NAME;
+		name_beginning = ft_strlen(NAME_CMD_STRING);
+		while (line && line[name_beginning] && line[name_beginning] != '"')
+			++name_beginning;
+		++name_beginning;
+		name_ending = name_beginning;
+		while (line && line[name_ending] && line[name_ending] != '"')
+			++name_ending;
+		ft_strncpy(f->header.prog_name, (const char*)line + name_beginning, name_ending = name_beginning);
 	}
 	return ;
 }

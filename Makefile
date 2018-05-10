@@ -12,10 +12,12 @@
 
 NAME = asm
 
-SRCS = mb_checkup.c \
+SRCS = mb_asm.c \
+		mb_checkup.c \
 		mb_initiation.c \
 		mb_mainread.c \
 		mb_support_func.c \
+		mb_support_func2.c \
 		main.c
 
 OBJS = $(SRCS:.c=.o)
