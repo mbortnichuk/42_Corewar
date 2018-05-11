@@ -16,7 +16,7 @@
 # include "libft/libft.h"
 # include "op.h"
 
-# include <stdbool.h>
+# include <stdbool.h> // for (true, false) in mb_iscomment() for now;
 
 # define RC "\033[0m"
 # define RED "\033[22;31m"
@@ -221,6 +221,12 @@ int		mb_parsefile(t_file *f);
 
 void	mb_initfile(t_file *f);
 int		mb_initline(t_file *f, char *line, size_t i, int linetype);
+
+
+/*
+** mb_token.c
+*/
+
 
 
 #endif

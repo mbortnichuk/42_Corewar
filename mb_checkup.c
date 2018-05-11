@@ -87,6 +87,10 @@ int		mb_check_valid_param(t_symbol *symbol, char *str)
 						in this case usage of "exit(1 or 0)" is non-portable. */
 }
 
+/*
+** Look for .comment line, removing '"' and saving it
+*/
+
 void	mb_check_valid_comment(t_file *f, t_str *str)
 {
 	int		empty;
@@ -112,6 +116,10 @@ void	mb_check_valid_comment(t_file *f, t_str *str)
 	}
 	return ;
 }
+
+/*
+** Look for the .name line, removing the '"' and saving it. 
+*/
 
 void	mb_check_valid_name(t_file *f, t_str *str)
 {

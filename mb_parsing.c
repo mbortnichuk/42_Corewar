@@ -12,6 +12,11 @@
 
 #include "asm.h"
 
+/*
+** In this function label lines lose their final ':' to ease further comparsions 
+** with the labels of tokens in the middle.
+*/
+
 int		mb_parsefile(t_file *f)
 {
 	t_list	*temp;
