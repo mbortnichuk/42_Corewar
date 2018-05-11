@@ -13,7 +13,7 @@
 #include "asm.h"
 #define OPTAB	op_tab[instance - 1]
 
-extern	t_op op_tab[17]; /* 'extern' keyword is used to extend
+extern	const t_op op_tab[17]; /* 'extern' keyword is used to extend
 						the visibility of variables/functions/structures.
 						'extern' ініціалізує, в нашому випадку t_op, і вказує на те, 
 						що вона має зовнішні компонування (її ім'я буде видимим не тільки 
@@ -22,7 +22,7 @@ extern	t_op op_tab[17]; /* 'extern' keyword is used to extend
 						статичну властивість - виділяється на початку запуску програми 
 						і вивільняється при її закінченні. */
 
-/*int		mb_has_valid_parameter(t_str *str)
+int		mb_has_valid_parameter(t_str *str)
 {
 	int		new_t; //new type
 	size_t	nbr;
@@ -42,7 +42,7 @@ extern	t_op op_tab[17]; /* 'extern' keyword is used to extend
 	{
 		new_t = (SYMBOL->type == ARG_DLAB ? 2 : SYMBOL->type - 8);
 		new_t = (new_t == ARG_INDLAB - 8 ? 4 : new_t);
-		if (new_t & ~OPTAB.arg[nbr]) tilda '~' in C-like languages 
+		if (new_t & ~OPTAB.arg[nbr]) /*tilda '~' in C-like languages 
 					 performs as a bitwise NOT operation - all the 1 bits in the
 					 operand are set to 0 and all the 0 bits in the operand
 					 are set to 1. In other words, it creates the complement 
@@ -50,12 +50,12 @@ extern	t_op op_tab[17]; /* 'extern' keyword is used to extend
 					 For example:
 					 10101000 11101001 // Original  (Binary for -22,295 in 16-bit two's complement)
 					 01010111 00010110 // ~Original (Binary for  22,294 in 16-bit two's complement) */
-// 			return (0);
-// 		temp = temp->next;
-// 		++nbr;
-// 	}
-// 	return (1);
-// }
+			return (0);
+		temp = temp->next;
+		++nbr;
+	}
+	return (1);
+}
 
 int		mb_check_valid_param(t_symbol *symbol, char *str)
 {

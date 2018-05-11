@@ -57,3 +57,17 @@ void	mb_asm_err(char *s)
 	mb_putstr_col(s, LRED);
 	exit(EXIT_FAILURE);
 }
+
+size_t	mb_str_position(char *str, int c)
+{
+	register size_t i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == (char)c)
+			return (i);
+		++i;
+	}
+	return (-1);
+}

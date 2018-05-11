@@ -24,7 +24,17 @@ int		mb_parsefile(t_file *f)
 			if (STR->type != LABEL)
 				STR->type = EXECUTABLE;
 			if (!(f->header.prog_name[0]))
-				
+				mb_check_valid_name(f, STR);
+			if (!(f->header.comment[0]))
+				mb_check_valid_comment(f, STR);
+			if ((STR->type == EXECUTABLE) && /*((mb_tokenize_str(STR) == EXIT_FAILURE)*/ || (!mb_has_valid_parameter(STR)))
+				RET_ERR("File parsing has failed.\n", EXIT_FAILURE);
+			if (STR->type == LABEL)
+				(STR->line)[mb_str_position(STR->line, LABEL_CHAR)] = 0;
+			else
+				mb_get_linecode_length(STR);
 		}
+		temp = temp->next;
 	}
+	return (EXIT_SUCCESS);
 }

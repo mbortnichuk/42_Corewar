@@ -52,7 +52,7 @@ clean:
 	$(RM) $(OBJS)
 	@ echo "\033[33;1masm obj files are removed\033[0m"
 
-fclean:
+fclean: clean
 	make fclean -C $(LIBD)
 	$(RM) $(NAME)
 	@ echo "\033[31;m$(NAME) is deleted\033[0m"
