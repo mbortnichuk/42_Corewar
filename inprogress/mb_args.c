@@ -45,7 +45,7 @@ int		mb_check_arguments2(char **str, int op)
 		mb_check_correct_register(str, 1) || mb_check_indirect(str, 1)) && \
 		(mb_directory_check(str, op, 1) || mb_check_correct_register(str, 1) || \
 			mb_check_indirect(str, 1)) && mb_check_correct_register(str, 0)))
-		return (0);
+		return (1);
 	if (op == 11 && mb_check_correct_register(str, 1) && (mb_directory_check(str, op, 1) || \
 		mb_check_correct_register(str, 1) || mb_check_indirect(str, 1)) && \
 		(mb_directory_check(str, op, 0) || mb_check_correct_register(str, 0)))

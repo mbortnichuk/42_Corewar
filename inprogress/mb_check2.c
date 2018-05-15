@@ -48,7 +48,7 @@ int		mb_directory_check(char **str, int op, int ch)
 		else
 			g_position = g_position + 4;
 		(*str)++;
-		if (**str != LABEL_CHAR && !(**str >= '0' && **str <= '9') && \
+		if (**str != LABEL_CHAR && !ft_isdigit(**str)/*!(**str >= '0' && **str <= '9')*/ && \
 			**str != '-' && **str != '+')
 			mb_error2(15);
 		if (**str == LABEL_CHAR)

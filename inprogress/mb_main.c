@@ -30,13 +30,13 @@ int main(int ac, char **av)
 		{
 			head = mb_asmheader_initiation();
 			if (mb_parse(av[id++], head/*, ch*/) == -1)
-				ft_printf("Please insert one valid champ.\n");
+				ft_printf(YEL"Please insert one valid champ.\n"RC);
 			free(head);
 			head = NULL;
 			mb_globalvar_initiation();
 		}
 	}
 	else
-		ft_printf("You need to put one champ please.\n");
+		ft_printf(YEL"You need to put one champ please.\n"RC);
 	return (0);
 }

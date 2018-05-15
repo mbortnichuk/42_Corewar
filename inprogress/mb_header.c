@@ -41,7 +41,7 @@ int		mb_move_header_end(char *str, int i)
 	while (str[i] && str[i] != '\n' && i++)
 		if (str[i] && str[i] != ' ' && str[i] != '\t')
 			return (mb_error1(1));
-		return (0);
+	return (0);
 }
 
 /*
@@ -62,7 +62,8 @@ int		mb_handle_name_comm(int file_descr, t_header *header)
 		{
 			while ((str[i] == ' ' || str[i] == '\t') && str[i] != '\0')
 				i++;
-			mb_name_comm_cpy(&str[i], header, ft_strlen(NAME_CMD_STRING), ft_strlen(COMMENT_CMD_STRING));
+			mb_name_comm_cpy(&str[i], header, ft_strlen(NAME_CMD_STRING), \
+				ft_strlen(COMMENT_CMD_STRING));
 			if (mb_return_header(header, str) == 1)
 				return (1);
 		}

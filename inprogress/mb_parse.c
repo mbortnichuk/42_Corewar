@@ -23,7 +23,7 @@ int		mb_parse(char *champ, t_header *header/*, int ch*/)
 	position = 0;
 	lab = 0;
 	mb_check_champion(champ);
-	if ((file_descr = open(champ, O_RDONLY, 055)) == -1)
+	if ((file_descr = open(champ, O_RDONLY, 0555)) == -1)
 		return (ERROR);
 	mb_handle_name_comm(file_descr, header);
 	lab = mb_parseline(file_descr, &file);

@@ -68,7 +68,8 @@ int		mb_checklabel(char *line)
 		return (2);
 	}
 	else if (line[i] && line[i] != ' ' && line[i] != '\0' && line[i] != ';' && \
-		line[i] != '\n' && line[i] != '\t' && line[i] != COMMENT_CHAR && line[i] != ',')
+		line[i] != '\n' && line[i] != '\t' && line[i] != COMMENT_CHAR && \
+		line[i] != ',')
 	{
 		if (line[i + 1] == ' ' || line[i + 1] == '\n' || line[i + 1] == '\0')
 			return (mb_error1(4));

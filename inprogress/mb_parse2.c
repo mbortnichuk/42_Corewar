@@ -22,7 +22,7 @@ char	*mb_putline_infile(char *str, int i, char *f)
 		i++;
 	if (str[i] && str[i] != COMMENT_CHAR && str[i] != ';' && \
 		mb_checkline(&str[i]))
-	f = mb_freejoin(&str[i], f);
+		f = mb_freejoin(&str[i], f);
 	free(str);
 	str = NULL;
 	return (f);

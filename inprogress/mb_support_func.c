@@ -75,7 +75,7 @@ void	mb_globalvar_initiation(void)
 int		mb_check_arguments(int ac)
 {
 	if (ac == 2)
-		ft_printf("You need to put one champ please.\n");
+		ft_printf(YEL"You need to put one champ please.\n"RC);
 	return (1);
 }
 

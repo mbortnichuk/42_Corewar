@@ -20,7 +20,7 @@ int		mb_return_header(t_header *header, char *str)
 {
 	if (header->comment[0] && header->prog_name[0])
 	{
-		if (ft_strrchr(str, '"') != ft_strrchr(str, '"'))
+		if (ft_strrchr(str, '"') != ft_strchr(str, '"'))
 		{
 			free(str);
 			str = NULL;

@@ -169,5 +169,4 @@ char	*mb_freejoin(char *str, char *file);
 int		mb_tab_free(char **table, int res);
 int		ft_strclen(char *str, char c);
 
-
 #endif

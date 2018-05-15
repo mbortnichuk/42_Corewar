@@ -13,7 +13,7 @@
 #include "asm.h"
 
 /*
-** Function thar reallocate memory to retrieve the entire .c file.
+** Function thar reallocate memory to retrieve the entire .s file.
 */
 
 char	*mb_realloc(char *str, char *file, int i)
