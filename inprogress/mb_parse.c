@@ -30,7 +30,7 @@ int		mb_parse(char *champ, t_header *header/*, int ch*/)
 	mb_check_duplicate_label(lab);
 	if (mb_label_exists(lab, file) == 0)
 		return (mb_error2(12));
-	// mb_reader(lab, header, champ, file);
+	mb_creator(lab, header, champ, file);
 	if (file && file[0])
 		free(file);
 	if (lab)

@@ -91,6 +91,42 @@ int		g_temporary;
 int		mb_check_arguments1(char **str, int op);
 int		mb_check_arguments2(char **str, int op);
 
+/*
+** mb_bin.c
+*/
+
+char	*mb_filemove(int fc, char *f);
+int		mb_move_sepchar(char **f);
+int		mb_put_register(int file_descr, char **f);
+int		mb_put_indirect(int file_descr, t_lab *lab, char **f);
+int		mb_put_directory(int file_descr, int sz, t_lab *lab, char **f);
+
+/*
+** mb_bin2.c
+*/
+
+int		mb_scary_func_name1(int fc, int file_descr, t_lab *lab, char **f);
+int		mb_scary_func_name2(int fc, int file_descr, t_lab *lab, char **f);
+
+/*
+** mb_bin_creator.c
+*/
+
+char	*mb_create_cor(char	*champion);
+int		mb_create_header(int file_descr, t_header *head);
+int		mb_opcode(int file_descr, int argument, int i, char *f);
+int		mb_bin_create(int file_descr, t_lab *lab, char *f);
+int		mb_creator(t_lab *lab, t_header *head, char *champion, char *f);
+
+/*
+** mb_bin_creator2.c
+*/
+
+int		mb_convert_endian1(int i);
+int		mb_convert_endian2(int i);
+void	mb_set_opcode(int *oct, int i, int ch, char *f);
+int		mb_move_i(int i, char *f);
+int		mb_calc_i(char *f, t_lab *lab);
 
 /*
 ** mb_check.c

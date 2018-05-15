@@ -13,6 +13,10 @@
 NAME = asm
 
 SRCS = mb_args.c \
+		mb_bin.c \
+		mb_bin2.c \
+		mb_bin_creator.c \
+		mb_bin_creator2.c \
 		mb_check.c \
 		mb_check2.c \
 		mb_header.c \
