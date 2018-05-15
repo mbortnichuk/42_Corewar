@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_wordlength.c                                    :+:      :+:    :+:   */
+/*   ft_countwords.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbortnic <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: iosypenk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/08 16:02:37 by mbortnic          #+#    #+#             */
-/*   Updated: 2017/11/10 12:00:04 by mbortnic         ###   ########.fr       */
+/*   Created: 2017/11/09 11:08:58 by iosypenk          #+#    #+#             */
+/*   Updated: 2017/11/09 11:09:03 by iosypenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_wordlength(char const *s, char c)
+int		ft_countwords(char const *s, char c)
 {
-	int i;
-	int length;
+	int		i;
+	int		count;
 
 	i = 0;
-	length = 0;
-	if (!s)
-		return (0);
+	count = 0;
 	while (s[i] == c)
 		i++;
-	while (s[i] != c && s[i] != '\0')
+	while (s[i])
 	{
-		length++;
+		if ((s[i] == c && s[i + 1] != c) ||
+			(s[i] != c && s[i + 1] == '\0'))
+			count++;
 		i++;
 	}
-	return (length);
+	return (count);
 }

@@ -85,6 +85,14 @@ int		g_position;
 int		g_temporary;
 
 /*
+** mb_args.c
+*/
+
+int		mb_check_arguments1(char **str, int op);
+int		mb_check_arguments2(char **str, int op);
+
+
+/*
 ** mb_check.c
 */
 
@@ -92,6 +100,7 @@ int		mb_check_champion(char *c);
 int		mb_sepchar_is_correct(char **str);
 int		mb_checklabel(char *line);
 int		mb_check_duplicate_label(t_lab *lab);
+int		mb_check_indirect(char **str, int ch);
 
 /*
 ** mb_check2.c
@@ -109,6 +118,15 @@ int		mb_checkline(char *str);
 
 int		mb_move_header(char *str, int name, int comment, int ch);
 int		mb_move_header_end(char *str, int i);
+int		mb_handle_name_comm(int file_descr, t_header *header);
+
+/*
+** mb_header2.c
+*/
+
+t_header	*mb_header_cpy(char *str, t_header *header, int ch);
+int		mb_name_comm_cpy(char *str, t_header *header, int n, int c);
+int		mb_return_header(t_header *header, char *str);
 
 /*
 ** mb_operation_name.c
@@ -123,7 +141,7 @@ int		mb_error2(int er);
 ** mb_parse.c
 */
 
-int		mb_parse(char *champ/*, t_header *header, int ch*/);
+int		mb_parse(char *champ, t_header *header/*, int ch*/);
 
 /*
 ** mb_parse2.c
@@ -141,5 +159,15 @@ int		mb_asmlabel_free(t_lab *lab);
 void	mb_globalvar_initiation(void);
 int		mb_check_arguments(int ac);
 t_header	*mb_asmheader_initiation(void);
+
+/*
+** mb_support_func2.c
+*/
+
+char	*mb_realloc(char *str, char *file, int i);
+char	*mb_freejoin(char *str, char *file);
+int		mb_tab_free(char **table, int res);
+int		ft_strclen(char *str, char c);
+
 
 #endif

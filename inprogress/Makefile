@@ -12,14 +12,17 @@
 
 NAME = asm
 
-SRCS = mb_check.c \
+SRCS = mb_args.c \
+		mb_check.c \
 		mb_check2.c \
 		mb_header.c \
+		mb_header2.c \
 		mb_main.c \
 		mb_operation_name.c \
 		mb_parse.c \
 		mb_parse2.c \
-		mb_support_func.c
+		mb_support_func.c \
+		mb_support_func2.c
 
 OBJS = $(SRCS:.c=.o)
 

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbortnic <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: iosypenk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/31 16:27:18 by mbortnic          #+#    #+#             */
-/*   Updated: 2017/11/01 17:01:08 by mbortnic         ###   ########.fr       */
+/*   Created: 2017/11/02 08:11:13 by iosypenk          #+#    #+#             */
+/*   Updated: 2017/11/02 08:11:15 by iosypenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_isprint(int c)
+int	ft_isprint(int c)
 {
-	if (c >= 0040 && c <= 0176)
+	if (c >= 32 && c <= 126)
 		return (1);
 	return (0);
 }

@@ -1,17 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_swap_bits.c                                     :+:      :+:    :+:   */
+/*   ft_countchar.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbortnic <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: iosypenk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/18 13:32:24 by mbortnic          #+#    #+#             */
-/*   Updated: 2017/11/18 13:35:01 by mbortnic         ###   ########.fr       */
+/*   Created: 2017/11/10 11:43:24 by iosypenk          #+#    #+#             */
+/*   Updated: 2017/11/10 11:43:29 by iosypenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-unsigned char	ft_swap_bits(unsigned char octet)
+int		ft_countchar(const char *str, char c)
 {
-	octet = ((octet >> 4) || (octet << 4));
-	return (octet);
+	int		len;
+
+	len = 0;
+	while (*str == c)
+		str++;
+	while (*str)
+	{
+		if (*str != c)
+		{
+			len++;
+			str++;
+		}
+		else
+			str++;
+	}
+	return (len);
 }

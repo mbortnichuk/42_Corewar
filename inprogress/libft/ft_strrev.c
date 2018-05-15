@@ -1,34 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_numberlength.c                                  :+:      :+:    :+:   */
+/*   ft_strrev.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbortnic <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: iosypenk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/10 14:50:06 by mbortnic          #+#    #+#             */
-/*   Updated: 2017/11/10 15:13:58 by mbortnic         ###   ########.fr       */
+/*   Created: 2017/11/13 11:53:27 by iosypenk          #+#    #+#             */
+/*   Updated: 2017/11/13 11:53:30 by iosypenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_numberlength(int n)
-{
-	int				i;
-	unsigned int	nb;
+#include "libft.h"
 
+void	ft_strrev(char *s)
+{
+	size_t	i;
+	size_t	j;
+	char	c;
+
+	if (!s || s[0] == '\0')
+		return ;
 	i = 0;
-	if (n == 0)
-		return (1);
-	if (n < 0)
-	{
+	while (s[i])
 		i++;
-		nb = -n;
-	}
-	else
-		nb = n;
-	while (nb != 0)
+	j = 0;
+	while (j < --i)
 	{
-		nb /= 10;
-		i++;
+		c = s[i];
+		s[i] = s[j];
+		s[j] = c;
+		j++;
 	}
-	return (i);
+	return ;
 }

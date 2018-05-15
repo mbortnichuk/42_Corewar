@@ -65,23 +65,17 @@ int		mb_oper_name2(char *str)
 int		mb_error1(int er)
 {
 	if (er == 1)
-		ft_putstr("Incorrect name format in line: ");
-		// ft_printf("Incorrect name format in line: %d\n", g_str);
+		ft_printf(RED BOLD"Incorrect name format in line: %d\n"RC, g_str);
 	else if (er == 2)
-		ft_putstr("Incorrect comment format in line: ");
-		// ft_printf("Incorrect comment format in line: %d\n", g_str);
+		ft_printf(RED BOLD"Incorrect comment format in line: %d\n"RC, g_str);
 	else if (er == 3)
-		ft_putstr("Incorrect labels_char format in line: ");
-		// ft_printf("Incorrect labels_char format in line: %d\n", g_str);
+		ft_printf(RED BOLD"Incorrect labels_char format in line: %d\n"RC, g_str);
 	else if (er == 4)
-		ft_putstr("Incorrect label_char format in line: ");
-		// ft_printf("Incorrect label_char format in line: %d\n", g_str);
+		ft_printf(RED BOLD"Incorrect label_char format in line: %d\n"RC, g_str);
 	else if (er == 5)
-		ft_putstr("Incorrect operation name in line: ");
-		// ft_printf("Incorrect operation name in line: %d\n", g_str);
+		ft_printf(RED BOLD"Incorrect operation name in line: %d\n"RC, g_str);
 	else if (er == 7)
-		ft_putstr("It is not an indirect in line: ");
-		// ft_printf("It is not an indirect in line: %d\n", g_str);
+		ft_printf(RED BOLD"It is not an indirect in line: %d\n"RC, g_str);
 	exit(0);
 	return (0);
 }
@@ -89,29 +83,20 @@ int		mb_error1(int er)
 int		mb_error2(int er)
 {
 	if (er == 8)
-		ft_putstr("There is some issues with program arguments.");
-		// ft_printf("There is some issues with program arguments. %d\n", g_str);
+		ft_printf(RED BOLD"There is some issues with program arguments. %d\n"RC, g_str);
 	else if (er == 9)
-		ft_putstr("There is the same label being used.\n");
+		ft_printf(RED BOLD"There is the same label being used.\n"RC);
 	else if (er == 10)
-		ft_putstr("There is no matching between labels.\n");
+		ft_printf(RED BOLD"There is no matching between labels.\n"RC);
 	else if (er == 11)
-		ft_putstr("Cannot find name or comment.\n");
+		ft_printf(RED BOLD"Cannot find name or comment.\n"RC);
 	else if (er == 12)
-		ft_putstr("There is no program arguments or there are too much of them: %d\n");
+		ft_printf(RED BOLD"Cannot find any arguments or there are too much of them: %d\n"RC);
 	else if (er == 13)
-		ft_putstr("There are multiple lines of name or comment.\n");
+		ft_printf(RED BOLD"There are multiple lines of name or comment.\n"RC);
 	else if (er == 14)
-		ft_putstr("Incorrect file extension.\n");
+		ft_printf(RED BOLD"Incorrect file extension.\n"RC);
 	else if (er == 15)
-		ft_putstr("Where is LABEL_CHAR?\n");
+		ft_printf(RED BOLD"Where is LABEL_CHAR?\n"RC);
 	return (mb_error1(er));
 }
-
-
-// if (er == 11)
-// 		ft_putstr("Cannot find name or comment!\n");
-// 	else if (er = 12)
-// 		ft_printf("Cannot find any arguments or you there are too much of them for operation.\n", g_str);
-
-

@@ -99,7 +99,30 @@ int		mb_check_duplicate_label(t_lab *lab)
 }
 
 /*
-** Check if the indirect is correct. mb_check_correct_indirect()
+** Check if the indirect is correct.
 */
 
-
+int		mb_check_indirect(char **str, int ch)
+{
+	if (**str == LABEL_CHAR)
+	{
+		(*str)++;
+		while (**str && ft_strchr(LABEL_CHARS, **str))
+			(*str)++;
+	}
+	else if (((**str == '+' || **str == '-') && (*str)++) || \
+		ft_isdigit(**str))
+	{
+		while (ft_isdigit(**str))
+			(*str)++;
+	}
+	else
+		return (0);
+	if (**str != '\0' && **str != '\n' && **str != SEPARATOR_CHAR && \
+		**str != ' ' && **str != '\t')
+		return (mb_error1(7));
+	g_position = g_position + 2;
+	if (ch == 1)
+		return (mb_sepchar_is_correct(str));
+	return (1);
+}

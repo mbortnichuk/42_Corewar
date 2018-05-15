@@ -3,37 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbortnic <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: iosypenk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/06 18:05:41 by mbortnic          #+#    #+#             */
-/*   Updated: 2017/11/13 19:07:08 by mbortnic         ###   ########.fr       */
+/*   Created: 2017/11/09 07:45:05 by iosypenk          #+#    #+#             */
+/*   Updated: 2017/11/09 07:45:08 by iosypenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	blanks(int n)
+char	*ft_strtrim(char const *s)
 {
-	if (n == ' ' || n == '\t' || n == '\n')
-		return (1);
-	return (0);
-}
+	char	*new;
+	size_t	end;
+	size_t	begin;
+	size_t	len;
 
-char		*ft_strtrim(char const *s)
-{
-	unsigned int	i;
-	size_t			len;
-	char			*ret;
-
-	if (!s)
+	if (!(s))
 		return (NULL);
-	i = 0;
-	while (blanks(s[i]))
-		i++;
-	len = ft_strlen(s) - 1;
-	while (len > i && blanks(s[len]))
-		len--;
-	if (len < i)
-		return (ret = ft_strdup("\0"));
-	return (ret = ft_strsub(s, i, len - (size_t)i + 1));
+	end = ft_strlen(s) - 1;
+	begin = 0;
+	while (ft_isspace(s[begin]) == 1)
+		begin++;
+	if (begin == end + 1)
+	{
+		if (!(new = ft_strnew(0)))
+			return (NULL);
+		return (new);
+	}
+	while (ft_isspace(s[end]) == 1)
+		end--;
+	len = end - begin + 1;
+	if (!(new = ft_strnew(len)))
+		return (NULL);
+	ft_strncpy(new, &s[begin], len);
+	return (new);
 }

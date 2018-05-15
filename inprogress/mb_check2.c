@@ -142,7 +142,7 @@ int		mb_checkline(char *str)
 		str = str + 3;
 	if (fc != 1 && fc != 9 && fc != 12 && fc != 15)
 		g_position++;
-	// mb_check_arguments(&str, fc);
+	mb_check_arguments2(&str, fc);
 	while (*str && *str != '\n' && *str != COMMENT_CHAR && *str != ';')
 		if (*str && *str != ' ' && *str != '\t' && *str != '\n')
 			return (mb_error2(12));

@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_sqrt.c                                          :+:      :+:    :+:   */
+/*   ft_strrevrange.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbortnic <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: iosypenk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/18 13:38:43 by mbortnic          #+#    #+#             */
-/*   Updated: 2017/11/18 13:41:08 by mbortnic         ###   ########.fr       */
+/*   Created: 2017/11/13 13:57:27 by iosypenk          #+#    #+#             */
+/*   Updated: 2017/11/13 13:57:31 by iosypenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_sqrt(int nb)
-{
-	int		i;
+#include "libft.h"
 
-	i = 1;
-	if (nb <= 0)
-		return (0);
-	while (i < 46342)
+void	ft_strrevrange(char *s, size_t start, size_t end)
+{
+	char	c;
+
+	if (!s || s[0] == '\0')
+		return ;
+	while (start < end)
 	{
-		if ((i * i) == nb)
-			return (1);
-		i++;
+		c = s[end];
+		s[end] = s[start];
+		s[start] = c;
+		start++;
+		end--;
 	}
-	return (0);
+	return ;
 }

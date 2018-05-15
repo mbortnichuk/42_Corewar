@@ -12,7 +12,7 @@
 
 #include "asm.h"
 
-int main(int ac, char const **av)
+int main(int ac, char **av)
 {
 	int		id;
 	int		ch;
@@ -29,14 +29,14 @@ int main(int ac, char const **av)
 		while (id < ac)
 		{
 			head = mb_asmheader_initiation();
-			// if (mb_asm_parse(av[id++], head, ch) == -1)
-			// 	ft_putstr("Please insert one valid champ.\n");
-			id++;
+			if (mb_parse(av[id++], head/*, ch*/) == -1)
+				ft_printf("Please insert one valid champ.\n");
 			free(head);
 			head = NULL;
+			mb_globalvar_initiation();
 		}
 	}
 	else
-		ft_putstr("You need to put one champ please.\n");
+		ft_printf("You need to put one champ please.\n");
 	return (0);
 }

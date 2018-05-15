@@ -3,38 +3,53 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbortnic <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: iosypenk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/10 12:42:23 by mbortnic          #+#    #+#             */
-/*   Updated: 2017/11/10 15:13:18 by mbortnic         ###   ########.fr       */
+/*   Created: 2017/11/09 18:57:23 by iosypenk          #+#    #+#             */
+/*   Updated: 2017/11/09 18:57:26 by iosypenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_itoa(int n)
+static int	ft_countnbr(int nb)
 {
-	char			*number;
-	unsigned int	nb;
-	int				length;
+	int		count;
 
-	length = ft_numberlength(n);
-	number = (ft_strnew(length));
-	if (!number)
-		return (0);
-	nb = n;
-	if (n < 0)
-	{
-		number[0] = '-';
-		nb = -n;
-	}
-	if (n == 0)
-		number[0] = '0';
-	number[length--] = '\0';
+	count = 0;
+	if (nb <= 0)
+		count = 1;
 	while (nb != 0)
 	{
-		number[length--] = (nb % 10) + '0';
-		nb /= 10;
+		nb = nb / 10;
+		count++;
 	}
-	return (number);
+	return (count);
+}
+
+char		*ft_itoa(int n)
+{
+	char				*res;
+	unsigned int		len;
+	unsigned int		sign;
+	unsigned int		nb;
+
+	nb = n;
+	sign = 0;
+	len = ft_countnbr(n);
+	if (!(res = (char *)malloc(sizeof(char) * (len + 1))))
+		return (NULL);
+	if (n < 0)
+	{
+		res[0] = '-';
+		nb = -n;
+		sign = -1;
+	}
+	while (len-- > ((sign == 0) ? 0 : 1))
+	{
+		res[len] = nb % 10 + 48;
+		nb = nb / 10;
+	}
+	res[ft_countnbr(n)] = '\0';
+	return (res);
 }
