@@ -16,7 +16,7 @@ int		mb_is_reg(char *w)
 {
 	if (*w != 'r')
 		return (0);
-	if (!ft_str_isdigit(w + 1))
+	if (!mb_str_isdigit(w + 1))
 		return (0);
 	if (*(w + 3))
 		return (0);
@@ -42,7 +42,7 @@ int		mb_get_key_word(char *w)
 	int i;
 
 	i = 0;
-	while (g_tab.[i].name)
+	while (g_tab[i].name)
 	{
 		if (!(ft_strcmp(g_tab[i].name, w)))
 			return (i);
@@ -68,12 +68,12 @@ t_chr	mb_line_manager(t_symbol *s, t_chr c, int file_descr)
 
 t_chr	mb_whtsp_manager(t_symbol *s, t_chr c, int file_descr)
 {
-	while (ft_strchr(Whtspc, c.c) || c.c == COMMENT_CHAR || c.c == COMMENT_CHR2)
+	while (ft_strchr(WHTSPACE, c.c) || c.c == COMMENT_CHAR || c.c == COMMENT_CHR2)
 	{
-		while (ft_strchr(Whtspc, c.c))
+		while (ft_strchr(WHTSPACE, c.c))
 		{
 			s->type = (t_sample){Whtspc};
-			while (ft_strchr(Whtspc, c.c))
+			while (ft_strchr(WHTSPACE, c.c))
 			{
 				if (c.c == '\n')
 					s->type = (t_sample){Nl};

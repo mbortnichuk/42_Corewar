@@ -20,14 +20,14 @@ int		mb_file_opc_parse(int inp, int outp, int i[2], t_argum ar[3])
 	while (k++ < 4)
 		inp = inp << 2;
 	k = -1;
-	if (g_tab[i][1].codage)
+	if (g_tab[i[1]].codage)
 	{
 		mb_fix_write(outp, &inp, 1);
 		mb_get_lable()->position++;
 	}
 	while (++k < i[0])
 	{
-		mb_fix_write(outpm &(ar[k].val), ar[k].size);
+		mb_fix_write(outp, &(ar[k].val), ar[k].size);
 		mb_get_lable()->position += ar[k].size;
 	}
 	mb_get_lable()->position++;
@@ -39,7 +39,7 @@ t_argum	mb_argum_parse(int inp, t_symbol *s, int opcode)
 	t_argum	ar;
 
 	ar = (t_argum){-1, -1, -1};
-	while (s->type == (t_sample){Wthpsc})
+	while (s->type == (t_sample){Whtspc})
 		*s = mb_lexic(inp);
 	if (s->type == (t_sample){Symbol})
 	{
@@ -52,14 +52,14 @@ t_argum	mb_argum_parse(int inp, t_symbol *s, int opcode)
 		ar = (t_argum){T_IND, ft_atoi(s->line), IND_SIZE};
 	else if (s->type == (t_sample){Reg})
 		ar = (t_argum){T_REG, ft_atoi(s->line + 1), 1};
-	while ((*s = mb_lexic(inp)).type == (t_sample){Wthpsc})
+	while ((*s = mb_lexic(inp)).type == (t_sample){Whtspc})
 		;
 	return (ar);
 }
 
 int		mb_skip_wthpsc_parse(int inp, t_symbol *s)
 {
-	while (s->type == (t_sample){Wthpsc} || s->type == (t_sample){Nl})
+	while (s->type == (t_sample){Whtspc} || s->type == (t_sample){Nl})
 		*s = mb_lexic(inp);
 	return (0);
 }

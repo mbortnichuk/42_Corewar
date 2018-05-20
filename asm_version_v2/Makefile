@@ -28,11 +28,6 @@ SRCS = mb_bin.c \
 		mb_support_func2.c \
 		main.c
 
-		# mb_bin.c \
-		# mb_bin2.c \
-		# mb_bin_creator.c \
-		# mb_bin_creator2.c \
-
 OBJS = $(SRCS:.c=.o)
 
 INCL = -I /libft/libft.h -I asm.h

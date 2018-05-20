@@ -20,8 +20,14 @@ int		mb_err(char	*str, int err)
 
 int		mb_label_err(char *line, int err)
 {
-	ft_printf("There is no label %s while attempting 
-		to dereference symbol %s.\n", line, line);
+	// ft_printf("There is no label %s while attempting to dereference symbol %s.\n", line, line);
+	// return (err);
+
+	write(1, "No such label ", 14);
+	ft_putstr(line);
+	write(1, " while attempting to dereference token \":", 42);
+	ft_putstr(line);
+	ft_putendl("\"");
 	return (err);
 }
 

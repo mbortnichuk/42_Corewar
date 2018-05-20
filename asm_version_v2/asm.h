@@ -16,10 +16,9 @@
 # include "./libft/libft.h"
 
 # include <fcntl.h>
+# include <limits.h>
 
 # include "op.h"
-
-// extern	t_op	g_tab[17];
 
 # define OPP(id)	g_tab[id]
 
@@ -53,10 +52,10 @@
 
 typedef struct s_lab	t_lab;
 typedef struct s_symbol	t_symbol;
-typedef enum e_sample	t_sample;
+// typedef enum e_sample	t_sample;
 typedef struct s_chr	t_chr;
 typedef struct s_argum	t_argum;
-typedef struct s_op		t_op;
+// typedef struct s_op		t_op;
 
 struct s_lab
 {
@@ -64,15 +63,7 @@ struct s_lab
 	int		position;
 };
 
-struct s_symbol
-{
-	char	line[COMMENT_LENGTH + 1];
-	int		str;
-	int		column;
-	t_sample	type;
-};
-
-enum e_sample
+typedef enum e_sample
 {
 	Unknwn = -1,
 	Nothing = 0,
@@ -85,6 +76,14 @@ enum e_sample
 	Str,
 	Symbol,
 	Numb
+}			t_sample;
+
+struct s_symbol
+{
+	char	line[COMMENT_LENGTH + 1];
+	int		str;
+	int		column;
+	t_sample	type;
 };
 
 struct s_chr
@@ -101,7 +100,7 @@ struct s_argum
 	char	type;
 };
 
-struct s_op
+typedef struct s_op
 {
 	char				*name;
 	short				numb_of_arg;
@@ -110,7 +109,7 @@ struct s_op
 	short				cycles;
 	short				codage;
 	char				dir_size;
-};
+}				t_op;
 
 /*
 ** mb_bin.c
@@ -121,6 +120,7 @@ unsigned short	mb_rev_16byte(unsigned int n);
 unsigned int	mb_read_fix32(int area);
 unsigned int	mb_read_fix16(int area);
 ssize_t	mb_fix_write(int area, const void *buff, size_t nbt);
+
 
 /*
 ** mb_check.c
@@ -133,7 +133,7 @@ int		mb_start_checklable(void);
 ** mb_err.c
 */
 
-int		mb_err(char *str, int err);
+int		mb_err(char	*str, int err);
 int		mb_label_err(char *line, int err);
 int		mb_lexic_err(t_symbol symbol, int err);
 
@@ -231,5 +231,6 @@ int		mb_get_key_word(char *w);
 t_chr	mb_line_manager(t_symbol *s, t_chr c, int file_descr);
 t_chr	mb_whtsp_manager(t_symbol *s, t_chr c, int file_descr);
 
+extern	t_op	g_tab[17];
 
 #endif

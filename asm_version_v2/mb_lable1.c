@@ -58,19 +58,19 @@ int		mb_label(int inp, int *val)
 		return (mb_lexic_err(s, 1));
 	while (s.type != (t_sample){Nothing})
 	{
-		mb_start_skip_whtspc(inp, &c);
-		if (c.type == (t_sample){Label})
+		mb_start_skip_whtspc(inp, &s);
+		if (s.type == (t_sample){Label})
 		{
-			if (mb_label_manager(inp, &c, val))
-				return (mb_lexic_err(c, 2));
+			if (mb_start_manage_lable(inp, &s, val))
+				return (mb_lexic_err(s, 2));
 		}
-		else if (c.type == (t_sample){Keyw})
+		else if (s.type == (t_sample){Keyw})
 		{
-			if (mb_start_opcode_manager(inp, &c, val))
-				return (mb_lexic_err(c, 3));
+			if (mb_start_opcode_manager(inp, &s, val))
+				return (mb_lexic_err(s, 3));
 		}
-		else if (c.type != (t_sample){Nothing})
-			return (mb_lexic_err(c, 4));
+		else if (s.type != (t_sample){Nothing})
+			return (mb_lexic_err(s, 4));
 	}
 	if (mb_start_checklable())
 		return (5);

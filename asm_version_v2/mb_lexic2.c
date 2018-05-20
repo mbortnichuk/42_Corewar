@@ -14,7 +14,7 @@
 
 int		mb_start_skip_whtspc(int inp, t_symbol *s)
 {
-	while (s->type == (t_sample){Whtspc} || s->type == (t_sample){NL})
+	while (s->type == (t_sample){Whtspc} || s->type == (t_sample){Nl})
 		*s = mb_lexic(inp);
 	return (0);
 }
@@ -28,7 +28,7 @@ int		mb_lookin_opcode(int inp, int *val, t_symbol *s, int opcode)
 	i = -1;
 	k = -1;
 	*s = mb_lexic(inp);
-	*val++;
+	*val += 1;
 	while (++i < g_tab[opcode].numb_of_arg)
 	{
 		if (i && s->type == (t_sample){Symbol} && *(s->line) == SEPARATOR_CHAR)
@@ -40,8 +40,8 @@ int		mb_lookin_opcode(int inp, int *val, t_symbol *s, int opcode)
 		if (!(g_tab[opcode].arg[i] & ar[i].type))
 			return (3);
 	}
-	if (g_op[opcode].codage)
-		*val++;
+	if (g_tab[opcode].codage)
+		*val += 1;
 	while (++k < i)
 		*val += ar[k].size;
 	return (0);
@@ -49,7 +49,7 @@ int		mb_lookin_opcode(int inp, int *val, t_symbol *s, int opcode)
 
 int		mb_start_opcode_manager(int inp, t_symbol *s, int *val)
 {
-	if (mb_lookin_opcode(inp, val, s, ft_get_key_word(s->line)))
+	if (mb_lookin_opcode(inp, val, s, mb_get_key_word(s->line)))
 		return (1);
 	while (s->type != (t_sample){Nl})
 	{
@@ -70,11 +70,11 @@ t_symbol	mb_lexic(int file_descr)
 	s.column = c.column;
 	s.str = c.str;
 	ft_memset(s.line, 0, COMMENT_LENGTH + 1);
-	if (ft_strchr(Whtspc, c.c) || c.c == COMMENT_CHAR || c.c == COMMENT_CHR2)
+	if (ft_strchr(WHTSPACE, c.c) || c.c == COMMENT_CHAR || c.c == COMMENT_CHR2)
 		c = mb_whtsp_manager(&s, c, file_descr);
 	else if (ft_strchr(SYMBOL_CHR, c.c))
 	{
-		s = ft_symbol_update(s, (t_sample{Symbol}, c.c));
+		s = mb_symbol_update(s, (t_sample){Symbol}, c.c);
 		c = mb_checker(file_descr);
 	}
 	else if (c.c == '"')

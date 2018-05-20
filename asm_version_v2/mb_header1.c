@@ -16,11 +16,11 @@ int		mb_parse_head_arg(int inp, t_symbol *s, int i)
 {
 	*s = mb_lexic(inp);
 	while (s->type == (t_sample){Whtspc} || s->type == (t_sample){Nl})
-		*s = mb_lexic(in);
-	if (s->type != (t_sample){Symbol} || *(s->type) != '.')
+		*s = mb_lexic(inp);
+	if (s->type != (t_sample){Symbol} || *(s->line) != '.')
 		return (1);
 	*s = mb_lexic(inp);
-	if (s->type != (t_sample){Label} || ft_ctrcmp(s->line, (i == 0) ? "name" : "comment"))
+	if (s->type != (t_sample){Label} || ft_strcmp(s->line, (i == 0) ? "name" : "comment"))
 		return (2);
 	return (0);
 }
@@ -35,7 +35,7 @@ int		mb_parse_head(int inp, int outp, t_symbol *s, int *val)
 	{
 		if (mb_parse_head_arg(inp, s, i))
 			return (1);
-		while ((*s = mb_checker(inp)).type == (t_sample){Whtspc})
+		while ((*s = mb_lexic(inp)).type == (t_sample){Whtspc})
 			;
 		if (s->type != (t_sample){Str})
 			return (3);
@@ -44,7 +44,7 @@ int		mb_parse_head(int inp, int outp, t_symbol *s, int *val)
 		else if (i)
 			mb_fix_write(outp, val, sizeof(i));
 		write(outp, s->line, i == 0 ? PROG_NAME_LENGTH + 4 : COMMENT_LENGTH + 4);
-		while ((*s = mb_checker(inp)).type != (t_sample){Nl})
+		while ((*s = mb_lexic(inp)).type != (t_sample){Nl})
 			if (s->type != (t_sample){Whtspc})
 				return (4);
 		i++;
@@ -68,7 +68,7 @@ int		mb_header_skip(int inp, t_symbol *s)
 		if (s->type != (t_sample){Label} || ft_strcmp(s->line, \
 			(i == 0) ? "name" : "comment"))
 			return (2);
-		while ((*s = mb_lexic(input)).type == (t_sample){Whtspc})
+		while ((*s = mb_lexic(inp)).type == (t_sample){Whtspc})
 			;
 		if (s->type != (t_sample){Str})
 			return (3);

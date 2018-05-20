@@ -19,13 +19,12 @@ int		main(int ac, char **av)
 
 	if (ac < 2 || ac > 3)
 		return (mb_err("You need to put one champion, please", 1));
-	if (!(print = ft_checkfile(av[1])))
-		return (mb_err("Sorry, cannot read passed file 
-			as program argument.", 1));
-	if ((res = ft_creator(av[1], print)))
-		return (ft_del(res));
+	if (!(print = mb_checkfile(av[1])))
+		return (mb_err("Sorry, cannot read passed file as program argument.", 1));
+	if ((res = mb_creator(av[1], print)))
+		return (mb_del(res));
 	ft_printf("Writing output program to ", print);
 	ft_strdel(&print);
-	return (ft_del(0));
+	return (mb_del(0));
 	return (0);
 }

@@ -32,11 +32,11 @@ int		mb_str_isdigit(char *line) // check if it's working correctly later.
 	int i;
 
 	i = 0;
-	if (!*str)
+	if (!*line)
 		return (0);
-	while (str[i] != '\0')
+	while (line[i] != '\0')
 	{
-		if (str[i] < '0' || str[i] > '9')
+		if (line[i] < '0' || line[i] > '9')
 			return (0);
 		i++;
 	}
