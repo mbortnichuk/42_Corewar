@@ -18,9 +18,9 @@ int		main(int ac, char **av)
 	int		res;
 
 	if (ac < 2 || ac > 3)
-		return (mb_err("You need to put one champion, please", 1));
+		return (mb_err("You need to put one champion, please.\nUsage: ./asm [filename.s]", 1));
 	if (!(print = mb_checkfile(av[1])))
-		return (mb_err("Sorry, cannot read passed file as program argument.", 1));
+		return (mb_err("Sorry, cannot read source file as program argument.", 1));
 	if ((res = mb_creator(av[1], print)))
 		return (mb_del(res));
 	ft_printf("Writing output program to ", print);

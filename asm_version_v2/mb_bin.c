@@ -48,7 +48,7 @@ unsigned int	mb_read_fix16(int area)
 	return (mb_rev_16byte(arg_s));
 }
 
-ssize_t	mb_fix_write(int area, const void *buff, size_t nbt) // mb_fixed_write(); nbt -> nbyte
+ssize_t	mb_fix_write(int area, const void *buff, size_t nbt) // nbt -> nbyte
 {
 	unsigned int	fix;
 
