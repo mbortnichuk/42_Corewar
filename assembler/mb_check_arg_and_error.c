@@ -13,6 +13,27 @@
 #include "asm.h"
 
 /*
+** Checks if the instruction name is correct and return
+** the corresponding int.
+*/
+
+int				io_instruction_name(char *str)
+{
+	unsigned int	i;
+
+	i = 16;
+	while (i > 0)
+	{
+		if (!strncmp(g_tab[i].name, str, ft_strlen(g_tab[i].name)))
+		{
+			return (i);
+		}
+		i--;
+	}
+	return (0);
+}
+
+/*
 ** Check the validity of the args of each instruct.
 */
 
@@ -71,22 +92,16 @@ static int		error2(t_assm *assm, int err)
 	if (err == 13)
 		ft_printf("There is multiple lines of name or comment.\n"RC);
 	if (err == 14)
-	{
-		ft_printf("Incorrect file extension, bro.\n"RC);
-		exit(0);
-	}
+		ft_printf("Incorrect file extension.\n"RC);
 	if (err == 15)
 		ft_printf("Where is a LABEL_CHAR?\n"RC);
 	if (err == 16)
-	{
 		ft_printf("Can not open/read source file.\n"RC);
-		exit(0);
-	}
 	if (err == 17)
-	{
 		ft_printf("Wrong bot name or comment.\n"RC);
-		exit(0);
-	}
+	if (err == 18)
+		ft_printf("Empty label in line: "RED"%d\n"RC, assm->count);
+	(err >= 16 || err == 14) ? exit(0) : 0;
 	return (0);
 }
 
@@ -107,7 +122,7 @@ int				error(t_assm *assm, int err)
 	if (err == 7)
 		ft_printf("It's not an indirect in line: "RED"%d\n"RC, assm->count);
 	if (err == 8)
-		ft_printf("Wrong arguments"RED"%d\n"RC, assm->count);
+		ft_printf("Wrong arguments in line "RED"%d\n"RC, assm->count);
 	if (err == 9)
 		ft_printf("Same label error.\n"RC);
 	if (err == 10)

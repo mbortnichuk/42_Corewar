@@ -14,7 +14,10 @@
 # define ASM_H
 
 # include <fcntl.h>
+
 # include "../corewar.h"
+
+# define HEADER_SIZE	((4 * SIZE) + PROG_NAME_LENGTH + COMMENT_LENGTH)
 
 typedef struct			s_lab_lst
 {
@@ -84,8 +87,7 @@ void					io_create_lab_lst(t_lab_lst **head, char *lab);
 int						mb_arg_check(t_assm *assm, int op, char **str);
 int						error(t_assm *assm, int err);
 
-void					mb_parse_str(t_assm *assm, char **inp_file);
-int						mb_champion_check(t_assm *assm, char *champion);
+void					mb_parse_str(t_assm *a, char **i, char **s, char **t);
 
 int						mb_dir_check(t_assm *assm, int op, int c, char **s);
 int						mb_reg_check(t_assm *assm, int ch, char **str);
@@ -93,7 +95,7 @@ int						mb_ind_check(t_assm *assm, int ch, char **str);
 int						mb_valid_line_check(t_assm *assm, char *str);
 
 int						io_instruction_name(char *str);
-int						mb_label_exist(t_assm *assm, char *line);
+int						mb_label_exist(t_assm *assm, char **line);
 int						mb_check_valid_label(t_assm *assm, char *line);
 int						mb_check_label_duplicate(t_assm *assm, t_lab_lst *lab);
 

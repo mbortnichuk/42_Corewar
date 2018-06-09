@@ -13,23 +13,6 @@
 #include "asm.h"
 
 /*
-** Check is the file ends with .s
-*/
-
-int					mb_champion_check(t_assm *assm, char *champion)
-{
-	int		j;
-
-	j = 0;
-	while (champion[j])
-		j++;
-	if (j > 3 && champion[j - 1] == 's' && champion[j - 2] == '.')
-		return (1);
-	else
-		return (error(assm, 14));
-}
-
-/*
 ** Return 1 if header is ok, if not ok - 0 and then error.
 */
 
@@ -108,31 +91,52 @@ static char			*save_line(t_assm *assm, char *str, char *inp_file, int i)
 ** Retrieve the name of the label, position in a chained list.
 */
 
-void				mb_parse_str(t_assm *assm, char **inp_file)
+static void			check_last_line(t_assm *assm, char *line)
+{
+	char	*tmp;
+	int		i;
+	int		size;
+
+	i = 0;
+	size = 0;
+	tmp = NULL;
+	if (ft_strchr(line, LABEL_CHAR))
+	{
+		size = ft_strlen(line) - ft_strlen(ft_strchr(line, LABEL_CHAR)) + 1;
+		while (line[size] && (line[size] == '\t' || line[size] == ' '))
+			size++;
+	}
+	if (mb_check_valid_label(assm, line) >= 1 &&
+		!mb_valid_line_check(assm, line + size))
+		error(assm, 18);
+	ft_strdel(&line);
+}
+
+void				mb_parse_str(t_assm *assm, char **inp, char **str, char **t)
 {
 	int		i;
-	char	*str;
 	int		len;
 
-	str = NULL;
-	while (get_next_line(assm->fd_s, &str) > 0)
+	while (get_next_line(assm->fd_s, str) > 0)
 	{
 		i = 0;
 		assm->count++;
-		while (str[i] && (str[i] == '\t' || str[i] == ' '))
+		while ((*str)[i] && ((*str)[i] == '\t' || (*str)[i] == ' '))
 			i++;
-		if (str[i] && str[i] != COMMENT_CHAR && str[i] != ';' &&
-			mb_check_valid_label(assm, str) >= 1)
+		if ((*str)[i] && (*str)[i] != COMMENT_CHAR && (*str)[i] != ';' &&
+			mb_check_valid_label(assm, *str) >= 1)
 		{
 			len = 0;
-			while (str[len] && str[len] != LABEL_CHAR)
+			while ((*str)[len] && (*str)[len] != LABEL_CHAR)
 				len++;
-			io_create_lab_lst(&assm->lab_lst, ft_strsub(str, 0, len));
-			while (str[i] && str[i] != LABEL_CHAR)
+			io_create_lab_lst(&assm->lab_lst, ft_strsub(*str, 0, len));
+			while ((*str)[i] && (*str)[i] != LABEL_CHAR)
 				i++;
 			i++;
 		}
-		if (str != NULL)
-			*inp_file = save_line(assm, str, *inp_file, i);
+		(*t != NULL) ? ft_strdel(t) : 0;
+		*t = ft_strdup(*str);
+		(*str != NULL) ? *inp = save_line(assm, *str, *inp, i) : 0;
 	}
+	check_last_line(assm, *t);
 }

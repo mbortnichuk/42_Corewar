@@ -50,35 +50,39 @@ static void		mb_reader(t_assm *assm, char *champion)
 	close(assm->fd_s);
 }
 
+static int		mb_champion_check(t_assm *assm, char *champion)
+{
+	int		j;
+
+	j = 0;
+	while (champion[j])
+		j++;
+	if (j > 3 && champion[j - 1] == 's' && champion[j - 2] == '.')
+		return (1);
+	else
+		return (error(assm, 14));
+}
+
 static int		mb_start_parse(t_assm *assm, char *champ)
 {
 	char	*buff;
+	char	*line;
+	char	*tmp;
 
 	buff = NULL;
+	tmp = NULL;
 	mb_champion_check(assm, champ);
 	if ((assm->fd_s = open(champ, O_RDONLY)) == -1)
 		return (-1);
 	io_save_header_info(assm, &buff);
-	mb_parse_str(assm, &buff);
+	mb_parse_str(assm, &buff, &line, &tmp);
 	mb_check_label_duplicate(assm, assm->lab_lst);
-	if (mb_label_exist(assm, buff) == 0)
+	if (mb_label_exist(assm, &buff) == 0)
 		return (error(assm, 12));
 	mb_reader(assm, champ);
 	if (buff && buff[0])
 		ft_strdel(&buff);
 	return (0);
-}
-
-static void		mb_init(t_assm *assm)
-{
-	assm->count = 0;
-	assm->args_count = 0;
-	assm->lab_lst = NULL;
-	assm->esc = 0;
-	assm->push = 0;
-	assm->header.magic = magic(COREWAR_EXEC_MAGIC);
-	ft_memset(assm->header.prog_name, 0, PROG_NAME_LENGTH + 1);
-	ft_memset(assm->header.comment, 0, COMMENT_LENGTH + 1);
 }
 
 int				main(int argc, char **argv)
@@ -87,12 +91,18 @@ int				main(int argc, char **argv)
 
 	if (argc > 1)
 	{
-		mb_init(&assm);
+		assm.count = 0;
+		assm.args_count = 0;
+		assm.lab_lst = NULL;
+		assm.esc = 0;
+		assm.push = 0;
+		assm.header.magic = magic(COREWAR_EXEC_MAGIC);
+		ft_memset(assm.header.prog_name, 0, PROG_NAME_LENGTH + 1);
+		ft_memset(assm.header.comment, 0, COMMENT_LENGTH + 1);
 		if (mb_start_parse(&assm, argv[1]) == -1)
 			error(&assm, 16);
 	}
 	else
 		ft_printf(YEL"Usage: ./asm filename.s\n"RC);
-	system("leaks asm");
 	return (0);
 }

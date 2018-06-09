@@ -19,9 +19,9 @@ int			not_cmd(char *line)
 	i = 0;
 	while (line[i])
 	{
-		if (!ft_isspace(line[i]) && line[i] != '#')
+		if (!ft_isspace(line[i]) && line[i] != '#' && line[i] != ';')
 			return (1);
-		if (line[i] == '#')
+		if (line[i] == '#' || line[i] == ';')
 			return (0);
 		i++;
 	}

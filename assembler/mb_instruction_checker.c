@@ -99,8 +99,7 @@ int				mb_ind_check(t_assm *assm, int ch, char **str)
 		while (**str && ft_strchr(LABEL_CHARS, **str))
 			(*str)++;
 	}
-	else if (((**str == '+' || **str == '-') && (*str)++) ||
-	ft_isdigit(**str))
+	else if (((**str == '+' || **str == '-') && (*str)++) || ft_isdigit(**str))
 	{
 		while (ft_isdigit(**str))
 			(*str)++;

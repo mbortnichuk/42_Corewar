@@ -13,27 +13,6 @@
 #include "asm.h"
 
 /*
-** Checks if the instruction name is correct and return
-** the corresponding int.
-*/
-
-int					io_instruction_name(char *str)
-{
-	unsigned int	i;
-
-	i = 16;
-	while (i > 0)
-	{
-		if (!strncmp(g_tab[i].name, str, ft_strlen(g_tab[i].name)))
-		{
-			return (i);
-		}
-		i--;
-	}
-	return (0);
-}
-
-/*
 ** Check if the label exists in the struct (header).
 */
 
@@ -60,26 +39,39 @@ static int			mb_label_match(t_assm *assm, char *line, t_lab_lst *lab)
 ** Check if the label exists in the struct (header).
 */
 
-int					mb_label_exist(t_assm *assm, char *line)
+static void			cut_comment(char **l)
+{
+	int			size;
+	char		*tmp;
+
+	size = ft_strlen(*l) - ft_strlen(ft_strchr(*l, COMMENT_CHAR));
+	tmp = ft_strsub(*l, 0, size);
+	ft_strdel(l);
+	*l = tmp;
+}
+
+int					mb_label_exist(t_assm *assm, char **l)
 {
 	int			len;
 	t_lab_lst	*lab;
 
 	len = 0;
 	lab = assm->lab_lst;
-	if (!line)
+	if (!*l)
 		return (0);
-	while (line[len] && line[len] != DIRECT_CHAR)
+	ft_strchr(*l, COMMENT_CHAR) ? cut_comment(l) : 0;
+	while ((*l)[len] && ((*l)[len] != DIRECT_CHAR || (*l)[len] != LABEL_CHAR))
 	{
 		len++;
-		if (line[len] == DIRECT_CHAR)
+		if ((*l)[len] == DIRECT_CHAR && (*l)[len + 1] == LABEL_CHAR)
+		{
+			len += 2;
+			mb_label_match(assm, &(*l)[len], lab);
+		}
+		else if ((*l)[len] == LABEL_CHAR && (*l)[len - 1] != DIRECT_CHAR)
 		{
 			len++;
-			if (line[len] == LABEL_CHAR)
-			{
-				len++;
-				mb_label_match(assm, &line[len], lab);
-			}
+			mb_label_match(assm, &(*l)[len], lab);
 		}
 	}
 	return (1);
@@ -124,17 +116,17 @@ int					mb_check_valid_label(t_assm *assm, char *l)
 
 int					mb_check_label_duplicate(t_assm *assm, t_lab_lst *lab)
 {
-	t_lab_lst *start_point;
+	t_lab_lst *lst;
 
-	start_point = lab;
+	lst = lab;
 	if (!lab)
 		return (1);
 	lab = lab->next;
 	while (lab)
 	{
-		if (!ft_strcmp(start_point->data, lab->data))
+		if (!ft_strcmp(lst->data, lab->data))
 			return (error(assm, 9));
 		lab = lab->next;
 	}
-	return (mb_check_label_duplicate(assm, start_point->next));
+	return (mb_check_label_duplicate(assm, lst->next));
 }
