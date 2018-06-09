@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbortnic <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: iosypenk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/31 13:44:54 by mbortnic          #+#    #+#             */
-/*   Updated: 2017/10/31 15:05:21 by mbortnic         ###   ########.fr       */
+/*   Created: 2017/11/02 08:42:30 by iosypenk          #+#    #+#             */
+/*   Updated: 2017/11/02 08:42:32 by iosypenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_toupper(int c)
+int	ft_toupper(int c)
 {
-	return ((c >= 97 && c <= 122) ? c - 32 : c);
+	if (c >= 97 && c <= 122)
+		return (c - 32);
+	return (c);
 }

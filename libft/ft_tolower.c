@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbortnic <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: iosypenk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/31 13:48:12 by mbortnic          #+#    #+#             */
-/*   Updated: 2017/11/07 16:49:31 by mbortnic         ###   ########.fr       */
+/*   Created: 2017/11/02 08:49:32 by iosypenk          #+#    #+#             */
+/*   Updated: 2017/11/02 08:49:34 by iosypenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_tolower(int c)
+int	ft_tolower(int c)
 {
-	return ((c >= 65 && c <= 90) ? c + 32 : c);
+	if (c >= 65 && c <= 90)
+		return (c + 32);
+	return (c);
 }

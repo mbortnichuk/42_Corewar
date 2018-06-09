@@ -3,46 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbortnic <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: iosypenk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/31 12:14:37 by mbortnic          #+#    #+#             */
-/*   Updated: 2017/11/10 15:44:22 by mbortnic         ###   ########.fr       */
+/*   Created: 2017/10/29 12:10:29 by iosypenk          #+#    #+#             */
+/*   Updated: 2017/10/29 12:10:33 by iosypenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-static int		skip_blanks(char c)
+int	ft_atoi(const char *str)
 {
-	return (c == ' ' || c == '\t' || c == '\v' || \
-			c == '\f' || c == '\r' || c == '\n');
-}
+	int					s;
+	unsigned long int	b;
 
-int				ft_atoi(const char *str)
-{
-	int					i;
-	unsigned long int	res;
-	int					neg;
-
-	i = 0;
-	res = 0;
-	neg = 1;
-	while (skip_blanks(str[i]))
-		i++;
-	if (str[i] == '-')
-		neg = -1;
-	if (str[i] == '-' || str[i] == '+')
-		i++;
-	while ((str[i] != '\0') && ft_isdigit(str[i]))
+	b = 0;
+	while (*str == ' ' || *str == '\n' || *str == '\r' ||
+		*str == '\v' || *str == '\t' || *str == '\f')
+		str++;
+	s = (*str == '-' ? -1 : 1);
+	if (*str == '-' || *str == '+')
+		str++;
+	while ((*str >= 48 && *str <= 57) && *str)
 	{
-		if ((res > 922337203685477580 || (res == 922337203685477580 && \
-			(str[i] - '0') > 7)) && neg == 1)
+		if ((b > 922337203685477580 || (b == 922337203685477580
+			&& (*str - 48) > 7)) && s == 1)
 			return (-1);
-		else if ((res > 922337203685477580 || (res == 922337203685477580 && \
-			(str[i] - '0') > 8)) && neg == -1)
+		else if ((b > 922337203685477580 || (b == 922337203685477580
+		&& (*str - 48) > 8)) && s == -1)
 			return (0);
-		res = res * 10 + str[i] - '0';
-		i++;
+		b = b * 10 + (*str - 48);
+		str++;
 	}
-	return (res * neg);
+	return (b * s);
 }

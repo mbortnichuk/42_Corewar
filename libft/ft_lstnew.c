@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbortnic <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: iosypenk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/10 16:52:36 by mbortnic          #+#    #+#             */
-/*   Updated: 2017/11/16 13:32:42 by mbortnic         ###   ########.fr       */
+/*   Created: 2017/11/10 16:13:30 by iosypenk          #+#    #+#             */
+/*   Updated: 2017/11/10 16:13:33 by iosypenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,28 @@
 
 t_list	*ft_lstnew(void const *content, size_t content_size)
 {
-	t_list *llist;
+	t_list	*new;
+	size_t	i;
 
-	if (!(llist = (t_list*)malloc(sizeof(t_list))))
+	if (!(new = (t_list *)malloc(sizeof(t_list))))
 		return (NULL);
 	if (!content)
 	{
-		llist->content = NULL;
-		llist->content_size = 0;
+		new->content = NULL;
+		new->content_size = 0;
 	}
 	else
 	{
-		if ((llist->content = malloc(content_size)) == NULL)
+		if (!(new->content = (t_list *)malloc(sizeof(content) * content_size)))
 		{
-			free(llist);
+			free(new);
+			new = NULL;
 			return (NULL);
 		}
-		ft_memcpy((llist->content), content, content_size);
-		llist->content_size = content_size;
+		i = -1;
+		while (++i < content_size)
+			((unsigned char *)new->content)[i] = ((unsigned char *)content)[i];
+		new->content_size = content_size;
 	}
-	llist->next = NULL;
-	return (llist);
+	return (new);
 }

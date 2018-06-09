@@ -1,13 +1,12 @@
 .name 		"dtonc v1.0pl2"
 .comment	"ta mere elle fait du rodeo sur les kfar"
-.extend
 	
 begin:
-#	st	r1, :boucle+1
-#	st	r1, :rboucle+1
-#	st	r1, :liver1+1
-#	st	r1, :liver2+1	
-#	st	r1, :gen+1
+	st	r1, :boucle
+	st	r1, :rboucle
+	st	r1, :liver1
+	st	r1, :liver2
+	st	r1, :gen
 	
 ld1:	
 	ld	%15, r3 	#offset

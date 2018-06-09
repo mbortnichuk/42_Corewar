@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbortnic <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: iosypenk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/25 17:01:36 by mbortnic          #+#    #+#             */
-/*   Updated: 2017/10/27 12:39:14 by mbortnic         ###   ########.fr       */
+/*   Created: 2017/10/29 19:56:31 by iosypenk          #+#    #+#             */
+/*   Updated: 2017/10/29 19:56:34 by iosypenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*ft_strncpy(char *dst, const char *src, size_t len)
 	size_t i;
 
 	i = 0;
-	while ((i < len) && src[i] != '\0')
+	while (i < len && src[i])
 	{
 		dst[i] = src[i];
 		i++;

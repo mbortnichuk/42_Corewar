@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbortnic <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: iosypenk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/31 16:14:10 by mbortnic          #+#    #+#             */
-/*   Updated: 2017/11/01 12:02:26 by mbortnic         ###   ########.fr       */
+/*   Created: 2017/11/02 08:03:05 by iosypenk          #+#    #+#             */
+/*   Updated: 2017/11/02 08:03:08 by iosypenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_isascii(int c)
+int	ft_isascii(int c)
 {
-	return (c >= 0000 && c <= 0177);
+	if (c >= 0 && c <= 127)
+		return (1);
+	return (0);
 }

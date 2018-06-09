@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_mmalloc.c                                       :+:      :+:    :+:   */
+/*   ft_memalloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbortnic <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: iosypenk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/03 16:31:16 by mbortnic          #+#    #+#             */
-/*   Updated: 2017/11/03 18:10:50 by mbortnic         ###   ########.fr       */
+/*   Created: 2017/11/07 13:34:08 by iosypenk          #+#    #+#             */
+/*   Updated: 2017/11/07 13:34:16 by iosypenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,16 @@
 
 void	*ft_memalloc(size_t size)
 {
-	size_t	i;
-	char	*arr;
+	unsigned char	*tmp;
+	size_t			i;
 
-	if (size > 0)
-	{
-		i = 0;
-		arr = (char *)malloc(sizeof(char) * size);
-		if (arr != NULL)
-		{
-			while (size > 0)
-			{
-				arr[i] = 0;
-				size--;
-				i++;
-			}
-			return (arr);
-		}
+	i = 0;
+	if (!(tmp = (void *)malloc(sizeof(tmp) * size)))
 		return (NULL);
+	while (i <= size)
+	{
+		tmp[i] = 0;
+		i++;
 	}
-	return (NULL);
+	return (tmp);
 }
