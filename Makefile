@@ -3,69 +3,55 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mbortnic <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: iosypenk <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2018/05/07 15:45:02 by mbortnic          #+#    #+#              #
-#    Updated: 2018/05/07 15:45:05 by mbortnic         ###   ########.fr        #
+#    Created: 2018/05/01 16:52:48 by iosypenk          #+#    #+#              #
+#    Updated: 2018/05/01 16:52:59 by iosypenk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = asm
+VM = corewar
 
-SRCS = mb_asm.c \
-		mb_checkup.c \
-		mb_initiation.c \
-		mb_mainread.c \
-		mb_support_func.c \
-		mb_support_func2.c \
-		main.c
+ASM = asm
 
-OBJS = $(SRCS:.c=.o)
+CC = gcc
 
-INCL = -I /libft/libft.h -I asm.h
+CFLAGS = -Wall -Wextra -Werror
 
-LIBF = -L./libft/ -lft
-LIBD = ./libft/
+ASM_OBJ :=	$(patsubst %.c,%.o,$(wildcard ./*.c))								\
+			$(patsubst %.c,%.o,$(wildcard ./assembler/*.c))						\
 
-CFLAGS = -Wall -Wextra -Werror -g3 -Wno-missing-prototypes \
-			-Qunused-arguments
-			# -Wno-missing-prototypes - determines whether warnings are issued for missing prototypes.
-			# -Qunused-arguments - to avoid superflous warnings of additionally forwarded gcc arguments.
-			# -g3 - maximum debug information.
+OBJ :=	$(patsubst %.c,%.o,$(wildcard ./*.c))									\
+		$(patsubst %.c,%.o,$(wildcard ./Core/VM/*.c))							\
+		$(patsubst %.c,%.o,$(wildcard ./Core/VIS/*.c))							\
+		$(patsubst %.c,%.o,$(wildcard ./Core/instructions/*.c))					\
 
-GCC = gcc
-CC = $(GCC)
+LIBFT = ./libft/libft.a
 
-RM = rm -fv
-		# -f ignoring ninexistent files and arguments, never prompt;
-		# -v explain what is being done.
+.PHONY: libft
 
-all: $(NAME)
+all: libft $(ASM) $(VM)
 
-$(NAME): $(OBJS)
-	make -C $(LIBD)
-	$(CC) $(CFLAGS) $(INCL) $(LIBF) $(OBJS) -o $(NAME)
-	@ echo "\033[32;1masm is ready\033[0m"
+$(ASM): $(ASM_OBJ)
+	$(CC) $(CFLAGS) -o $(ASM) $(ASM_OBJ) $(LIBFT)
+	
+$(VM): $(OBJ)
+	$(CC) $(CFLAGS) -o $(VM) $(OBJ) $(LIBFT) -lncurses
+
+libft:
+	make -C ./libft
+
+%.o : %.c
+	$(CC) $(CFLAGS) -o $@ -c $< 
 
 clean:
-	make clean -C $(LIBD)
-	$(RM) $(OBJS)
-	@ echo "\033[33;1masm obj files are removed\033[0m"
+	rm -f $(OBJ)
+	rm -f $(ASM_OBJ)
+	make clean -C ./libft
 
 fclean: clean
-	make fclean -C $(LIBD)
-	$(RM) $(NAME)
-	@ echo "\033[31;m$(NAME) is deleted\033[0m"
+	rm -f $(VM)
+	rm -f $(ASM)
+	make fclean -C ./libft
 
 re: fclean all
-	@ echo "\033[36;1mre performed\033[0m"
-
-%.o: %.c
-	$(CC) $(CFLAGS) $(INCL) -c $< -o $@
-
-norm:
-	@ echo "\033[35;1mWait a sec.\033[0m"
-	@ norminette *.c *.h ./libft/*.c *.h
-	@ echo "\033[35;1mnorminette check finished\033[0m"
-
-.PHONY: all clean fclean re norm
