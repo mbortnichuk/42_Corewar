@@ -9,6 +9,11 @@ Project consists of 4 parts:
 - Champion
 
 ## Run and navigation
+```
+git clone https://github.com/mbortnichuk/42_Corewar.git
+cd 42_Corewar
+make
+```
 **`asm`**
 ```
 Usage: ./asm Champion/Peer_beer.s
@@ -36,5 +41,3 @@ Usage: ./corewar	[-dump nbr_cycles] [-n number] [-vis] [-a] <player1.cor> <...> 
 - Maksym Rybak - [mrybak](https://github.com/Hurubashi "mrybak")
 - Mariana Bortnichuk - [mbortnic](https://github.com/mbortnichuk "mbortnic")
 - Vasyl Kravets - vkravets
-
-
